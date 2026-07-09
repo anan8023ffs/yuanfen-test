@@ -4,378 +4,429 @@ html
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>正缘城市 专属深度测试</title>
+    <title>你的专属缘分测试</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Microsoft Yahei", "PingFang SC", sans-serif;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
         }
 
         body {
+            background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
             min-height: 100vh;
-            color: #4a3f35;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            background:
-                radial-gradient(circle at 10% 10%, rgba(255,255,255,0.95), transparent 28%),
-                radial-gradient(circle at 90% 18%, rgba(255,228,235,0.9), transparent 32%),
-                radial-gradient(circle at 15% 85%, rgba(255,245,230,0.9), transparent 32%),
-                linear-gradient(135deg, #fff7fb 0%, #ffeaf2 45%, #f6dce3 100%);
         }
 
         .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(238, 156, 167, 0.3);
             width: 100%;
-            max-width: 520px;
-            background: rgba(255,255,255,0.72);
-            backdrop-filter: blur(18px);
-            border: 1px solid rgba(255,255,255,0.85);
-            border-radius: 24px;
-            padding: 38px 32px;
-            box-shadow:
-                0 18px 45px rgba(190, 155, 165, 0.25),
-                0 8px 18px rgba(0,0,0,0.08);
-        }
-
-        h1 {
+            max-width: 500px;
+            padding: 30px;
             text-align: center;
-            font-size: 25px;
-            color: #b76e79;
-            margin-bottom: 12px;
-            letter-spacing: 1px;
-            font-weight: 700;
         }
 
-        .desc {
-            text-align: center;
-            color: #8a7f74;
-            font-size: 15px;
-            margin-bottom: 32px;
-            line-height: 1.7;
+        .page {
+            display: none;
         }
 
-        .auth-box {
+        .page.active {
             display: block;
         }
 
-        .input-box {
-            margin: 24px 0;
+        h1 {
+            color: #c27ba0;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin: 20px 0;
         }
 
         input {
-            width: 100%;
-            padding: 15px 18px;
-            background: rgba(255,255,255,0.86);
-            border: 1px solid rgba(219, 172, 182, 0.45);
-            border-radius: 14px;
-            color: #4a3f35;
+            width: 80%;
+            padding: 12px;
+            border: 2px solid #ee9ca7;
+            border-radius: 10px;
             font-size: 16px;
             outline: none;
-            transition: all 0.3s;
+            text-align: center;
         }
 
-        input:focus {
-            border-color: #c98f9b;
-            background: #fffafb;
-            box-shadow: 0 0 0 3px rgba(201, 143, 155, 0.15);
-        }
-
-        .btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(90deg, #d48f9c, #e8aeb7);
-            color: #fff;
+        button {
+            background: linear-gradient(135deg, #ee9ca7, #c27ba0);
+            color: white;
             border: none;
-            border-radius: 14px;
+            padding: 12px 30px;
+            border-radius: 25px;
             font-size: 16px;
-            font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
             margin-top: 10px;
         }
 
-        .btn:hover {
-            opacity: 0.92;
-            transform: translateY(-2px);
-            box-shadow: 0 12px 28px rgba(212, 143, 156, 0.35);
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(194, 123, 160, 0.4);
         }
 
-        .tip {
-            color: #e07a8a;
-            text-align: center;
-            margin-top: 12px;
-            font-size: 14px;
-            height: 20px;
+        .question {
+            font-size: 18px;
+            color: #555;
+            margin: 20px 0;
+            line-height: 1.6;
         }
 
-        .quiz-box {
-            display: none;
+        .options {
+            display: grid;
+            gap: 12px;
+            margin-top: 20px;
         }
 
-        .q-num {
-            text-align: right;
-            color: #b76e79;
-            font-size: 14px;
-            margin-bottom: 22px;
-            font-weight: 500;
-        }
-
-        .q-title {
-            font-size: 19px;
-            line-height: 1.7;
-            margin-bottom: 32px;
-            text-align: center;
-            color: #4a3f35;
-        }
-
-        .option-item {
-            background: rgba(255,255,255,0.78);
-            border: 1px solid rgba(219, 172, 182, 0.35);
-            border-radius: 14px;
-            padding: 17px 20px;
-            margin-bottom: 15px;
+        .option {
+            background: #fff;
+            border: 2px solid #ee9ca7;
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 16px;
             cursor: pointer;
             transition: 0.3s;
-            color: #5a4f45;
+            color: #555;
         }
 
-        .option-item:hover {
-            background: #fff0f4;
-            border-color: #d48f9c;
-            transform: translateY(-1px);
-            box-shadow: 0 8px 20px rgba(212, 143, 156, 0.25);
+        .option:hover {
+            background: #ffdde1;
+            border-color: #c27ba0;
+            color: #c27ba0;
         }
 
-        .option-item:active {
-            transform: scale(0.98);
-        }
-
-        .result-box {
-            display: none;
+        .progress {
+            color: #c27ba0;
+            font-size: 14px;
+            margin-bottom: 15px;
         }
 
         .result-title {
             font-size: 22px;
-            color: #b76e79;
-            text-align: center;
-            margin-bottom: 24px;
-            line-height: 1.5;
+            color: #c27ba0;
+            margin-bottom: 15px;
         }
 
-        .result-city {
-            font-size: 26px;
-            font-weight: 800;
-            color: #d48f9c;
-            text-align: center;
-            margin-bottom: 24px;
+        .result-province {
+            font-size: 20px;
+            color: #ee9ca7;
+            font-weight: bold;
+            margin: 10px 0;
         }
 
-        .result-content {
-            line-height: 2;
-            color: #6b5f55;
-            font-size: 15px;
-            text-align: justify;
+        .result-text {
+            color: #666;
+            line-height: 1.8;
+            margin: 20px 0;
+            text-align: left;
+            padding: 0 10px;
         }
 
-        /* 预留数字位置样式 */
-        .num-box {
-            margin-top: 25px;
-            text-align: center;
+        .contact-info {
+            color: #c27ba0;
             font-size: 16px;
-            color: #b76e79;
-            font-weight: 600;
-        }
-
-        .restart-btn {
-            margin-top: 32px;
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 30px 24px;
-            }
-            h1 {
-                font-size: 22px;
-            }
-            .q-title {
-                font-size: 17px;
-            }
-            .result-city {
-                font-size: 22px;
-            }
+            font-weight: bold;
+            margin: 20px 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 授权页面 -->
-        <div class="auth-box" id="authPage">
-            <h1>正缘城市 深度测试</h1>
-            <p class="desc">凭第一直觉作答，探寻你的缘分所在地<br>本测试为付费专属内容，请输入授权码解锁</p>
-            <div class="input-box">
-                <input type="text" id="authCode" placeholder="请输入专属授权码">
+        <!-- 授权码页面 -->
+        <div class="page active" id="authPage">
+            <h1>🔐 请输入授权码</h1>
+            <div class="input-group">
+                <input type="text" id="authCode" placeholder="请输入授权码">
             </div>
-            <button class="btn" onclick="checkAuth()">立即验证并进入测试</button>
-            <div class="tip" id="authTip"></div>
+            <button onclick="checkAuth()">开始测试</button>
         </div>
 
-        <!-- 答题页面 -->
-        <div class="quiz-box" id="quizPage">
-            <div class="q-num" id="questionNum">第 1 题 / 共 15 题</div>
-            <div class="q-title" id="questionTitle"></div>
-            <div id="optionsBox"></div>
-        </div>
+        <!-- 题目页面容器 -->
+        <div id="questionPages"></div>
 
         <!-- 结果页面 -->
-        <div class="result-box" id="resultPage">
-            <h2 class="result-title">你的专属正缘城市</h2>
-            <div class="result-city" id="resultCity"></div>
-            <div class="result-content" id="resultText"></div>
-
-            <!-- ========== 在这里填写你的数字/联系方式 ========== -->
-            <div class="num-box">
-                订单页好评给客服截图可送财运测试
-            </div>
-            <!-- ============================================== -->
-
-            <button class="btn restart-btn" onclick="restartTest()">重新测试</button>
+        <div class="page" id="resultPage">
+            <h1>✨ 你的专属缘分结果 ✨</h1>
+            <div class="result-title">你的缘分省份组合：</div>
+            <div class="result-province" id="provinceResult"></div>
+            <div class="result-text" id="resultText"></div>
+            <div class="contact-info" id="contactInfo">希望您幸福一生</div>
+            <button onclick="restartTest()">重新测试</button>
         </div>
     </div>
 
     <script>
         // 固定授权码
-        const correctCode = "202608";
+        const CORRECT_AUTH_CODE = "202608";
 
-        // 15道测试题目
-        const questionList = [
-            {title: "闲暇时光，你更倾向于做什么？", opt: ["A. 宅家安静独处", "B. 约好友出门玩乐", "C. 规划短途旅行", "D. 学习提升自我"]},
-            {title: "四季之中，你最喜欢哪种天气？", opt: ["A. 温柔阴雨", "B. 明媚晴天", "C. 清爽大风天", "D. 微凉多云天"]},
-            {title: "日常饮食，你的口味偏向？", opt: ["A. 清淡本味", "B. 香辣浓郁", "C. 酸甜可口", "D. 咸香厚重"]},
-            {title: "你内心向往怎样的生活节奏？", opt: ["A. 安稳慢节奏", "B. 热闹充实", "C. 自由随性", "D. 紧凑上进"]},
-            {title: "出游时，更偏爱哪一类自然风光？", opt: ["A. 湖泊平原", "B. 高山峻岭", "C. 大海沙滩", "D. 森林幽谷"]},
-            {title: "面对陌生社交，你属于哪一类？", opt: ["A. 慢热内向", "B. 开朗健谈", "C. 佛系随缘", "D. 谨慎观望"]},
-            {title: "远距离出行，你的首选交通方式？", opt: ["A. 高铁动车", "B. 自驾车辆", "C. 飞机航班", "D. 大巴客车"]},
-            {title: "欣赏建筑，你更喜欢哪种风格？", opt: ["A. 江南雅致古风", "B. 北方大气古城", "C. 现代都市风", "D. 简约文艺风"]},
-            {title: "待人接物，你的性格底色是？", opt: ["A. 温柔细腻", "B. 直爽洒脱", "C. 活泼机灵", "D. 沉稳内敛"]},
-            {title: "如果长期定居，优先选择？", opt: ["A. 宜居二线城市", "B. 繁华一线城市", "C. 安逸小众小城", "D. 静谧乡镇"]},
-            {title: "节日里，你喜欢怎样的氛围？", opt: ["A. 家人小聚温馨", "B. 多人欢聚热闹", "C. 新鲜有趣玩法", "D. 安静独自度过"]},
-            {title: "日常穿搭，你的风格偏向？", opt: ["A. 简约素雅", "B. 休闲随性", "C. 潮流时尚", "D. 复古文艺"]},
-            {title: "睡前大部分时间会做？", opt: ["A. 追剧看书放松", "B. 和亲友聊天", "C. 放空发呆", "D. 规划次日事项"]},
-            {title: "面对新鲜事物，你的态度是？", opt: ["A. 偏爱安稳不喜改变", "B. 乐于主动尝试", "C. 新旧都可接受", "D. 观望后再决定"]},
-            {title: "你心中理想的约会地点？", opt: ["A. 书店/茶馆等安静场所", "B. 餐厅/夜市等美食地", "C. 景区/游乐园", "D. 户外散步公园"]}
+        // 30道题目
+        const questions = [
+            {
+                q: "1. 你更倾向于哪种恋爱节奏？",
+                options: ["A. 一见钟情，快速升温", "B. 慢慢了解，细水长流", "C. 朋友变恋人，顺其自然", "D. 暧昧拉扯，享受过程"]
+            },
+            {
+                q: "2. 你理想的约会场景是？",
+                options: ["A. 浪漫餐厅烛光晚餐", "B. 宅家一起看电影做饭", "C. 户外散步/露营/看风景", "D. 打卡网红店/逛展/旅行"]
+            },
+            {
+                q: "3. 你在感情里更像哪种角色？",
+                options: ["A. 主动付出的照顾者", "B. 细节敏感的观察者", "C. 随性自由的分享者", "D. 慢热被动的等待者"]
+            },
+            {
+                q: "4. 你能接受的异地恋距离是？",
+                options: ["A. 完全不能接受异地", "B. 同省不同城可以接受", "C. 跨省也能坚持，只要足够爱", "D. 随缘，距离不是问题"]
+            },
+            {
+                q: "5. 你对伴侣的哪一点最看重？",
+                options: ["A. 情绪稳定，能给你安全感", "B. 三观契合，聊得来最重要", "C. 有趣灵魂，能带你体验新鲜事物", "D. 温柔体贴，事事有回应"]
+            },
+            {
+                q: "6. 吵架时你更倾向于？",
+                options: ["A. 立刻解决，不冷战不隔夜", "B. 先冷静，再好好沟通", "C. 自己消化，不想麻烦对方", "D. 用撒娇/示弱化解矛盾"]
+            },
+            {
+                q: "7. 你更喜欢哪种相处模式？",
+                options: ["A. 天天黏在一起，形影不离", "B. 有各自空间，保持神秘感", "C. 时而黏人时而独立，张弛有度", "D. 像朋友一样轻松相处"]
+            },
+            {
+                q: "8. 你对未来伴侣的地域有偏好吗？",
+                options: ["A. 希望和自己同省份", "B. 南方省份优先", "C. 北方省份优先", "D. 完全不看地域，看感觉"]
+            },
+            {
+                q: "9. 你更吃哪种类型的异性？",
+                options: ["A. 温柔体贴型", "B. 成熟稳重型", "C. 阳光开朗型", "D. 清冷疏离型"]
+            },
+            {
+                q: "10. 你理想的婚姻状态是？",
+                options: ["A. 传统稳定，男主外女主内", "B. 平等分工，一起分担家务", "C. 丁克二人世界，自在随性", "D. 不婚主义，恋爱自由"]
+            },
+            {
+                q: "11. 你在感情里最害怕的是？",
+                options: ["A. 对方忽冷忽热不真诚", "B. 三观不合，无法沟通", "C. 失去自我，变得不像自己", "D. 新鲜感褪去，归于平淡"]
+            },
+            {
+                q: "12. 你会主动给伴侣制造惊喜吗？",
+                options: ["A. 经常，喜欢看到对方开心", "B. 偶尔，重要节日会准备", "C. 很少，觉得行动比形式重要", "D. 几乎不，不懂浪漫"]
+            },
+            {
+                q: "13. 你更看重伴侣的哪种特质？",
+                options: ["A. 家庭观念强，重视家人", "B. 事业有追求，有上进心", "C. 性格好，脾气好相处", "D. 有同理心，会换位思考"]
+            },
+            {
+                q: "14. 你理想的旅行方式是？",
+                options: ["A. 提前做好攻略，打卡景点", "B. 随走随停，走到哪算哪", "C. 宅酒店躺平，吃当地美食", "D. 去小众地方，体验当地生活"]
+            },
+            {
+                q: "15. 你在感情里更需要什么？",
+                options: ["A. 安全感，被坚定选择", "B. 陪伴感，随时都能找到", "C. 被理解，情绪能被接住", "D. 新鲜感，一直有心动"]
+            },
+            {
+                q: "16. 你能接受伴侣的小缺点吗？",
+                options: ["A. 只要人品好，小缺点都能包容", "B. 原则问题不能忍，其他可以商量", "C. 完全不能接受，必须完美契合", "D. 可以接受，但会慢慢改造对方"]
+            },
+            {
+                q: "17. 你更喜欢哪种生活节奏？",
+                options: ["A. 慢节奏，安稳平淡的小日子", "B. 快节奏，一起打拼搞事业", "C. 张弛有度，忙时认真闲时浪漫", "D. 自由随性，想干嘛干嘛"]
+            },
+            {
+                q: "18. 你对伴侣的社交圈要求是？",
+                options: ["A. 最好不要有异性朋友", "B. 可以有，但要保持边界感", "C. 完全不干涉，信任对方", "D. 希望融入对方的社交圈"]
+            },
+            {
+                q: "19. 你更吃哪种告白方式？",
+                options: ["A. 当众告白，公开偏爱", "B. 私下温柔告白，双向奔赴", "C. 顺其自然，不用刻意告白", "D. 文字告白，真诚走心"]
+            },
+            {
+                q: "20. 你理想的家庭氛围是？",
+                options: ["A. 热闹温馨，家人都很和睦", "B. 轻松平等，像朋友一样相处", "C. 安静安稳，互不打扰但彼此牵挂", "D. 浪漫仪式感，节日都有惊喜"]
+            },
+            {
+                q: "21. 你在感情里会为对方改变吗？",
+                options: ["A. 会，愿意为了对方变成更好的人", "B. 看情况，不好的习惯会改", "C. 不会，做自己最重要", "D. 会互相磨合，双向改变"]
+            },
+            {
+                q: "22. 你更在意伴侣的什么能力？",
+                options: ["A. 情绪稳定，能控制自己的脾气", "B. 解决问题的能力，遇事不逃避", "C. 沟通能力，有话能好好说", "D. 赚钱能力，给你稳定的生活"]
+            },
+            {
+                q: "23. 你喜欢的约会频率是？",
+                options: ["A. 每天都想见面", "B. 每周2-3次，保持新鲜感", "C. 周末见面，平时各自忙", "D. 随缘，想见面再约"]
+            },
+            {
+                q: "24. 你对未来的规划里，伴侣的位置是？",
+                options: ["A. 排在第一位，一切都以对方为重", "B. 和事业/生活并列，重要但不唯一", "C. 先过好自己，再考虑两个人的未来", "D. 没想过，走一步看一步"]
+            },
+            {
+                q: "25. 你更受不了哪种冷暴力？",
+                options: ["A. 不回消息，消失不见", "B. 阴阳怪气，不直接沟通", "C. 冷战，谁也不理谁", "D. 敷衍应付，没话可说"]
+            },
+            {
+                q: "26. 你喜欢的伴侣穿搭风格是？",
+                options: ["A. 干净清爽，简单大方", "B. 成熟稳重，有质感", "C. 潮流个性，有自己的风格", "D. 休闲随性，舒服就好"]
+            },
+            {
+                q: "27. 你在感情里更怕什么？",
+                options: ["A. 对方不爱了，自己还在原地", "B. 爱得太满，失去自我", "C. 被背叛，信任崩塌", "D. 新鲜感过了，就不爱了"]
+            },
+            {
+                q: "28. 你理想的养老生活是？",
+                options: ["A. 和伴侣一起环游世界", "B. 在家种菜养花，安稳度日", "C. 去南方小城定居，气候舒适", "D. 和朋友一起养老，热闹开心"]
+            },
+            {
+                q: "29. 你更看重伴侣的家庭背景吗？",
+                options: ["A. 很看重，门当户对很重要", "B. 一般，人品比家境重要", "C. 不看重，只要两个人合适", "D. 希望对方家庭氛围好"]
+            },
+            {
+                q: "30. 你对爱情的终极期待是？",
+                options: ["A. 一生一世一双人，从一而终", "B. 轰轰烈烈，爱过就不后悔", "C. 细水长流，陪伴是最长情的告白", "D. 双向奔赴，一起变成更好的人"]
+            }
         ];
 
-        // 15套独立结果（每套=两个不同省份+城市+解读）
-        const resultList = [
-            {city: "浙江 · 江苏", text: "你的正缘出现在浙江与江苏。对方性情温婉儒雅，生活精致注重仪式感。你们大概率通过工作合作、朋友介绍相识，感情细水长流，相处满是温柔与惬意。"},
-            {city: "四川 · 重庆", text: "你的正缘位于四川与重庆。对方热情爽朗、幽默有趣，自带烟火气息。聚会、旅行或是日常玩乐都会成为你们的邂逅契机，相处轻松快乐，缘分浓烈又真挚。"},
-            {city: "广东 · 福建", text: "你的正缘在广东深圳与福建厦门。对方眼界开阔、行动力强，敢于追逐梦想。出差、旅行、异地交流是相遇的主要方式，跨越距离的缘分，终将双向奔赴。"},
-            {city: "北京 · 陕西", text: "你的正缘来自北京与陕西西安。对方沉稳可靠、有担当，三观端正踏实。多因学业、事业结缘，感情循序渐进，一旦确定关系，便会长久相守不离不弃。"},
-            {city: "湖南 · 湖北", text: "你的正缘在湖南长沙与湖北武汉。对方性格外向、思维活跃，热爱生活也善于交际。常在商圈、娱乐场所或同城活动中相遇，相处热闹有趣，默契十足。"},
-            {city: "山东 · 辽宁", text: "你的正缘地处山东青岛与辽宁大连。对方大气豪爽、心胸开阔，待人真诚实在。海边出行、商务往来容易邂逅彼此，性格互补，感情安稳又暖心。"},
-            {city: "安徽 · 江西", text: "你的正缘在安徽合肥与江西南昌。对方温和内敛、心思细腻，待人谦和有礼。邻里、同事、亲友圈子是相遇之地，感情平淡却温暖，细水长流走到最后。"},
-            {city: "云南 · 贵州", text: "你的正缘位于云南昆明与贵州贵阳。对方热爱自由、随性浪漫，向往慢生活。旅行、旅居、特色活动会让你们相遇，彼此欣赏对方的洒脱，缘分浪漫又自由。"},
-            {city: "海南 · 广西", text: "你的正缘在海南海口与广西南宁。对方乐观开朗、温柔善良，热爱自然与生活。度假、旅居、户外游玩是相遇契机，相处氛围轻松治愈，幸福感满满。"},
-            {city: "河南 · 河北", text: "你的正缘来自河南郑州与河北石家庄。对方朴实真诚、勤奋上进，责任感极强。工作打拼、同乡聚会容易相识，感情脚踏实地，稳步走向未来。"},
-            {city: "上海 · 浙江", text: "你的正缘在上海与浙江宁波。对方时尚前卫、思路灵活，追求高品质生活。都市商圈、行业交流中邂逅，两人旗鼓相当，是势均力敌的美好缘分。"},
-            {city: "吉林 · 黑龙江", text: "你的正缘地处吉林长春与黑龙江哈尔滨。对方热情直爽、仗义暖心，性格大方不拘小节。冰雪文旅、北方同城活动容易相遇，相处直白热烈，真心相待。"},
-            {city: "广东 · 广东", text: "你的正缘在广东广州与珠海。对方务实能干、情商出众，懂生活也懂打拼。商贸往来、日常社交中相识，彼此扶持，事业与爱情可以同步收获。"},
-            {city: "江苏 · 浙江", text: "你的正缘位于江苏南京与浙江温州。对方聪慧机敏、心思缜密，兼具文雅与果敢。文化场所、商务场合容易结缘，灵魂契合，精神共鸣感极强。"},
-            {city: "甘肃 · 宁夏", text: "你的正缘在甘肃兰州与宁夏银川。对方淳朴善良、坚韧踏实，待人重情重义。异地务工、地域交流活动中相遇，感情纯粹真挚，相守安稳长久。"}
+        // 15种结果：每组两个省份+解读
+        const results = [
+            {
+                provinces: ["浙江", "四川"],
+                text: "你是温柔又清醒的类型，浙江的细腻和四川的热烈会中和成最适合你的缘分。浙江的稳妥给你安全感，四川的鲜活给你心动感，你们的爱情会像江浙的糖水一样甜，又像川渝的火锅一样热辣，平淡日子里藏着满满的惊喜。"
+            },
+            {
+                provinces: ["广东", "辽宁"],
+                text: "务实的广东遇上爽朗的辽宁，刚好能接住你所有的小情绪。广东人的踏实肯干能给你稳定的未来，辽宁人的直爽开朗能把你从emo里拉出来，你们的爱情没有弯弯绕绕，主打一个真诚和实在，越相处越舒服。"
+            },
+            {
+                provinces: ["江苏", "湖南"],
+                text: "江苏的温润和湖南的热烈，是天造地设的互补。江苏人的细心体贴能照顾到你所有细节，湖南人的热情主动能点燃你的生活，你们在一起既有江南的温柔缱绻，又有湘式的直球浪漫，越爱越上头。"
+            },
+            {
+                provinces: ["山东", "福建"],
+                text: "山东的踏实遇上福建的浪漫，会给你满满的安全感。山东人的实在靠谱能给你稳稳的依靠，福建人的温柔细腻能把你宠成小朋友，你们的爱情没有套路，全是真心，是能一起吃很多很多顿饭的长久陪伴。"
+            },
+            {
+                provinces: ["湖北", "陕西"],
+                text: "湖北的直爽和陕西的稳重，是最适配你的组合。湖北人的干脆利落能和你同频共振，陕西人的踏实可靠能给你满满的底气，你们在一起不扭捏不内耗，是既能一起拼事业，也能一起吃遍街头巷尾的灵魂伴侣。"
+            },
+            {
+                provinces: ["重庆", "黑龙江"],
+                text: "重庆的火辣遇上黑龙江的豪爽，和你的性格简直绝配。重庆人的敢爱敢恨能和你双向奔赴，黑龙江人的直来直往没有弯弯绕绕，你们的爱情热烈又坦荡，吵得快和好也快，日子永远热热闹闹不无聊。"
+            },
+            {
+                provinces: ["安徽", "广西"],
+                text: "安徽的温柔和广西的治愈，是能让你卸下防备的缘分。安徽人的细腻体贴能接住你所有的敏感，广西人的松弛随性能带你逃离焦虑，你们在一起不用刻意伪装，是可以做最真实自己的舒服爱情。"
+            },
+            {
+                provinces: ["江西", "吉林"],
+                text: "江西的真诚遇上吉林的直爽，是最不费劲的缘分。江西人的专一长情会把你放在心尖上，吉林人的开朗乐观能给你满满的正能量，你们的爱情没有猜忌和拉扯，是越相处越安心的长久陪伴。"
+            },
+            {
+                provinces: ["河南", "云南"],
+                text: "河南的踏实和云南的浪漫，刚好能平衡你的生活。河南人的靠谱稳重能给你稳稳的未来，云南人的松弛浪漫能带你看遍世间风景，你们在一起既有柴米油盐的安稳，也有诗和远方的浪漫。"
+            },
+            {
+                provinces: ["河北", "海南"],
+                text: "河北的稳重遇上海南的温柔，是能给你安全感的缘分。河北人的踏实肯干会为你们的未来努力，海南人的温柔治愈能抚平你所有的疲惫，你们的爱情像海岛的风一样舒服，细水长流，慢慢相爱。"
+            },
+            {
+                provinces: ["天津", "内蒙古"],
+                text: "天津的幽默和内蒙古的爽朗，和你的适配度拉满。天津人的风趣幽默能把你逗得哈哈大笑，内蒙古人的豪爽真诚没有套路，你们在一起永远不缺话题，吵吵闹闹也甜甜蜜蜜，日子过得热热闹闹。"
+            },
+            {
+                provinces: ["山西", "贵州"],
+                text: "山西的稳重遇上贵州的热烈，是最懂你的组合。山西人的踏实靠谱能给你满满的安全感，贵州人的热情直球能让你一直心动，你们的爱情既有细水长流的安稳，也有轰轰烈烈的浪漫。"
+            },
+            {
+                provinces: ["甘肃", "浙江"],
+                text: "甘肃的辽阔遇上浙江的细腻，刚好能包容你的所有。甘肃人的豁达开朗能带你走出内耗，浙江人的温柔体贴能照顾到你所有细节，你们在一起，一个带你看世界，一个陪你过日子，是双向奔赴的治愈爱情。"
+            },
+            {
+                provinces: ["青海", "四川"],
+                text: "青海的纯粹遇上四川的鲜活，是能让你找回自己的缘分。青海人的真诚纯粹没有套路，四川人的乐观开朗能给你满满的能量，你们的爱情简单又热烈，没有弯弯绕绕，主打一个开心自在。"
+            },
+            {
+                provinces: ["宁夏", "江苏"],
+                text: "宁夏的踏实遇上江苏的温柔，是能给你稳稳幸福的组合。宁夏人的真诚长情会把你宠成小朋友，江苏人的细腻体贴能懂你所有的欲言又止，你们的爱情像江南的烟雨一样温柔，细水长流，直到永远。"
+            }
         ];
 
-        let currentQ = 0;
-        let score = {A: 0, B: 0, C: 0, D: 0};
+        let currentQuestion = 0;
+        let totalScore = 0;
 
-        // 授权校验
-        function checkAuth() {
-            let inputVal = document.getElementById("authCode").value.trim();
-            let tip = document.getElementById("authTip");
-            if (inputVal === "") {
-                tip.innerText = "请输入授权码";
-                return;
-            }
-            if (inputVal !== correctCode) {
-                tip.innerText = "授权码无效，请重新核对";
-                return;
-            }
-            document.getElementById("authPage").style.display = "none";
-            document.getElementById("quizPage").style.display = "block";
-            currentQ = 0;
-            loadQuestion();
-        }
-
-        // 加载题目
-        function loadQuestion() {
-            let q = questionList[currentQ];
-            document.getElementById("questionNum").innerText = `第 ${currentQ + 1} 题 / 共 15 题`;
-            document.getElementById("questionTitle").innerText = q.title;
-            let box = document.getElementById("optionsBox");
-            box.innerHTML = "";
-            q.opt.forEach((item, idx) => {
-                let div = document.createElement("div");
-                div.className = "option-item";
-                div.innerText = item;
-                div.onclick = function () {
-                    selectOption(idx);
-                };
-                box.appendChild(div);
+        // 初始化题目页面
+        function initQuestions() {
+            const container = document.getElementById('questionPages');
+            questions.forEach((q, index) => {
+                const page = document.createElement('div');
+                page.className = 'page';
+                page.id = `question-${index}`;
+                page.innerHTML = `
+                    <div class="progress">进度：${index + 1}/${questions.length}</div>
+                    <div class="question">${q.q}</div>
+                    <div class="options">
+                        ${q.options.map((opt, i) => `
+                            <div class="option" onclick="selectOption(${index}, ${i})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(page);
             });
         }
 
-        // 选择选项计分 自动翻页
-        function selectOption(idx) {
-            let key = ["A", "B", "C", "D"][idx];
-            score[key]++;
-            currentQ++;
-            if (currentQ >= questionList.length) {
-                showResult();
+        // 选择选项
+        function selectOption(questionIndex, optionIndex) {
+            totalScore += optionIndex;
+            document.getElementById(`question-${questionIndex}`).classList.remove('active');
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                document.getElementById(`question-${currentQuestion}`).classList.add('active');
             } else {
-                loadQuestion();
+                showResult();
             }
         }
 
-        // 计算并展示结果
+        // 显示结果
         function showResult() {
-            document.getElementById("quizPage").style.display = "none";
-            document.getElementById("resultPage").style.display = "block";
+            document.getElementById('resultPage').classList.add('active');
+            const resultIndex = Math.floor(totalScore / 8) % results.length;
+            const result = results[resultIndex];
+            document.getElementById('provinceResult').textContent = `${result.provinces[0]} + ${result.provinces[1]}`;
+            document.getElementById('resultText').textContent = result.text;
+        }
 
-            let a = score.A, b = score.B, c = score.C, d = score.D;
-            let resIndex = 0;
-
-            if(a >= 8) resIndex = 0;
-            else if(b >= 8) resIndex = 1;
-            else if(c >= 8) resIndex = 2;
-            else if(d >= 8) resIndex = 3;
-            else if(a === 7) resIndex = 4;
-            else if(b === 7) resIndex = 5;
-            else if(c === 7) resIndex = 6;
-            else if(d === 7) resIndex = 7;
-            else if(a === 6) resIndex = 8;
-            else if(b === 6) resIndex = 9;
-            else if(c === 6) resIndex = 10;
-            else if(d === 6) resIndex = 11;
-            else if(a === 5) resIndex = 12;
-            else if(b === 5) resIndex = 13;
-            else resIndex = 14;
-
-            let res = resultList[resIndex];
-            document.getElementById("resultCity").innerText = res.city;
-            document.getElementById("resultText").innerText = res.text;
+        // 检查授权码
+        function checkAuth() {
+            const inputCode = document.getElementById('authCode').value;
+            if (inputCode === CORRECT_AUTH_CODE) {
+                document.getElementById('authPage').classList.remove('active');
+                document.getElementById(`question-${currentQuestion}`).classList.add('active');
+            } else {
+                alert('授权码错误，请重新输入');
+            }
         }
 
         // 重新测试
         function restartTest() {
-            currentQ = 0;
-            score = {A: 0, B: 0, C: 0, D: 0};
-            document.getElementById("resultPage").style.display = "none";
-            document.getElementById("authPage").style.display = "block";
-            document.getElementById("authCode").value = "";
-            document.getElementById("authTip").innerText = "";
+            currentQuestion = 0;
+            totalScore = 0;
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('authCode').value = '';
+            document.getElementById('authPage').classList.add('active');
         }
+
+        // 页面加载完成初始化
+        window.onload = function() {
+            initQuestions();
+        };
     </script>
 </body>
 </html>
